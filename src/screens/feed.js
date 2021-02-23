@@ -2,7 +2,7 @@ import React from 'react'
 import NoteFeed from '../component/NoteFeed'
 
 const Feed = ({ navigation }) => {
-    return <NoteFeed />
+    return <NoteFeed navigation={navigation} />
 }
 
 Feed.navigationOptions = {
