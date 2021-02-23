@@ -1,40 +1,32 @@
 import React from 'react'
-import {
-    Text,
-    View,
-    Image,
-    ActivityIndicator,
-    Button,
-    StyleSheet
-} from 'react-native'
+import { Image, ActivityIndicator, Button } from 'react-native'
+import styled from 'styled-components/native'
+
+const StyledView = styled.View`
+    flex: 1;
+    justify-content: center;
+`
+
+const H1 = styled.Text`
+    font-size: 48px;
+    font-weight: bold;
+`
+
+const P = styled.Text`
+    margin: 24px 0;
+    font-size: 18px;
+`
 
 const Main = () => {
     return (
-        <View style={styles.container}>
-            <Text style={styles.h1}>Jots</Text>
-            <Text style={styles.paragraph}>This is my app</Text>
+        <StyledView>
+            <H1>Jots</H1>
+            <P>This is my app</P>
             <ActivityIndicator size="large" />
             <Button title="Press Me!" />
             <Image source={require('../assets/images/hello-world.jpg')} />
-        </View>
+        </StyledView>
     )
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    h1: {
-        fontSize: 48,
-        fontWeight: 'bold'
-    },
-    paragraph: {
-        marginTop: 24,
-        marginBottom: 24,
-        fontSize: 18
-    }
-})
 
 export default Main
