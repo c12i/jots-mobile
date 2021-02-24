@@ -17,7 +17,7 @@ const StyledInput = styled.TextInput`
 const FormLabel = styled.Text`
     font-size: 18px;
     font-weight: bold;
-    padding: 5px;
+    padding: 2px;
 `
 
 const FormButton = styled.TouchableOpacity`
