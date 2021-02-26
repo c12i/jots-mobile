@@ -20,9 +20,7 @@ const Favorites = ({ navigation }) => {
     if (error) return <Center>Error: {error.message}</Center>
 
     return (
-        <View
-            style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
-        >
+        <View>
             {data.me.favorites.length > 0 ? (
                 <NoteFeed notes={data.me.favorites} navigation={navigation} />
             ) : (

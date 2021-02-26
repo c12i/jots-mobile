@@ -10,9 +10,7 @@ const Settings = ({ navigation }) => {
     }
 
     return (
-        <View
-            style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
-        >
+        <View style={{ paddingTop: 30 }}>
             <Button title="Sign Out" onPress={signOut} />
         </View>
     )
