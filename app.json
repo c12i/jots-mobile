@@ -11,20 +11,22 @@
         "splash": {
             "image": "./assets/custom/splash.png",
             "resizeMode": "cover",
-            "backgroundColor": "#4A90E2"
+            "backgroundColor": "#333"
         },
         "updates": {
             "fallbackToCacheTimeout": 1500
         },
         "assetBundlePatterns": ["**/*"],
         "ios": {
-            "supportsTablet": true
+            "supportsTablet": true,
+            "icon": "./assets/custom/icon.png"
         },
         "android": {
             "adaptiveIcon": {
                 "foregroundImage": "./assets/custom/icon.png",
                 "backgroundColor": "#4A90E2"
-            }
+            },
+            "package": "tk.muriuki"
         },
         "web": {
             "favicon": "./assets/favicon.png"
