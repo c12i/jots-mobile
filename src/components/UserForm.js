@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Text, View } from 'react-native'
 import styled from 'styled-components/native'
 
 const FormView = styled.View`
@@ -35,22 +36,51 @@ const ButtonText = styled.Text`
     font-size: 18px;
 `
 
-const UserForm = ({ navigation, signIn }) => {
+const SignUp = styled.TouchableOpacity`
+    margin-top: 20px;
+`
+
+const Link = styled.Text`
+    color: #0077cc;
+    font-weight: bold;
+`
+
+const UserForm = ({ navigation, action, formType }) => {
     const [username, setUsername] = useState()
+    const [email, setEmail] = useState()
     const [password, setPassword] = useState()
 
     const handleSubmit = () => {
-        signIn({ variables: { input: { username, password } } })
+        action({
+            variables: {
+                input:
+                    formType === 'signUp'
+                        ? { username, password, email }
+                        : { username, password }
+            }
+        })
     }
 
     return (
         <FormView>
+            {formType === 'signUp' && (
+                <View>
+                    <FormLabel>Email</FormLabel>
+                    <StyledInput
+                        onChangeText={(text) => setEmail(text)}
+                        value={email}
+                        textContentType="emailAddress"
+                        autoCompleteType="email"
+                        autoCapitalize="none"
+                        autoFocus={true}
+                    />
+                </View>
+            )}
             <FormLabel>Username</FormLabel>
             <StyledInput
                 onChangeText={(text) => setUsername(text)}
                 textContentType="username"
                 value={username}
-                autoCompleteType="username"
                 autoFocus={true}
                 autoCapitalize="none"
             />
@@ -61,9 +91,22 @@ const UserForm = ({ navigation, signIn }) => {
                 textContentType="password"
                 secureTextEntry={true}
             />
-            <FormButton title="Log In" onPress={handleSubmit}>
+            <FormButton onPress={handleSubmit}>
                 <ButtonText>Submit</ButtonText>
             </FormButton>
+            {formType !== 'signUp' ? (
+                <SignUp onPress={() => navigation.navigate('SignUp')}>
+                    <Text>
+                        Need an account? <Link>Sign up.</Link>
+                    </Text>
+                </SignUp>
+            ) : (
+                <SignUp onPress={() => navigation.navigate('SignIn')}>
+                    <Text>
+                        Have an account? <Link>Sign in.</Link>
+                    </Text>
+                </SignUp>
+            )}
         </FormView>
     )
 }

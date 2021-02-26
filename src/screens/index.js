@@ -10,6 +10,7 @@ import MyNotes from './mynotes'
 import NoteScreen from './note'
 import AuthLoading from './authloading'
 import SignIn from './signin'
+import SignUp from './signup'
 import Settings from './settings'
 
 const FeedStack = createStackNavigator({
@@ -27,11 +28,12 @@ const FavStack = createStackNavigator({
     Note: NoteScreen
 })
 
-const AuthStack = createSwitchNavigator({
-    SignIn: SignIn
+const AuthStack = createStackNavigator({
+    SignIn: SignIn,
+    SignUp: SignUp
 })
 
-const SettingsStack = createSwitchNavigator({
+const SettingsStack = createStackNavigator({
     Settings: Settings
 })
 

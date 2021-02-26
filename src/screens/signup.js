@@ -1,11 +1,12 @@
 import React from 'react'
+import { View } from 'react-native'
+import * as SecureStore from 'expo-secure-store'
 import { useMutation } from '@apollo/client'
 import styled from 'styled-components/native'
-import * as SecureStore from 'expo-secure-store'
 
 import UserForm from '../components/UserForm'
 import Loader from '../components/Loader'
-import { SIGN_IN } from '../gql/mutation'
+import { SIGN_UP } from '../gql/mutation'
 
 const ErrorText = styled.Text`
     color: #f5222d;
@@ -13,7 +14,7 @@ const ErrorText = styled.Text`
     padding-top: 50px;
 `
 
-const SignIn = ({ navigation }) => {
+const SignUp = ({ navigation }) => {
     const storeToken = (token) => {
         SecureStore.setItemAsync('token', token)
             .then(() => {
@@ -22,9 +23,9 @@ const SignIn = ({ navigation }) => {
             .catch(console.error)
     }
 
-    const [signIn, { error, loading }] = useMutation(SIGN_IN, {
+    const [signUp, { error, loading }] = useMutation(SIGN_UP, {
         onCompleted: (data) => {
-            storeToken(data.signIn.token)
+            storeToken(data.signUp.token)
         },
         onError: (err) => console.error(err)
     })
@@ -32,15 +33,19 @@ const SignIn = ({ navigation }) => {
     if (loading) return <Loader />
 
     return (
-        <React.Fragment>
+        <View>
             {error && <ErrorText>Error: {error.message}</ErrorText>}
-            <UserForm action={signIn} navigation={navigation} />
-        </React.Fragment>
+            <UserForm
+                action={signUp}
+                formType="signUp"
+                navigation={navigation}
+            />
+        </View>
     )
 }
 
-SignIn.navigationOptions = {
-    title: 'Sign In'
+SignUp.navigationOptions = {
+    title: 'Register'
 }
 
-export default SignIn
+export default SignUp

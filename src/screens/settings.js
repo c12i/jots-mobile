@@ -9,6 +9,8 @@ const Settings = ({ navigation }) => {
             .catch(console.error)
     }
 
+    SecureStore.getItemAsync('token').then(console.log).catch(console.error)
+
     return (
         <View style={{ paddingTop: 30 }}>
             <Button title="Sign Out" onPress={signOut} />
