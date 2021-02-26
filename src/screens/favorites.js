@@ -1,12 +1,33 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import { View } from 'react-native'
+import { useQuery } from '@apollo/client'
+import styled from 'styled-components/native'
 
-const Favorites = () => {
+import Loader from '../components/Loader'
+import NoteFeed from '../components/NoteFeed'
+import { MY_FAVORITES } from '../gql/query'
+
+const Center = styled.Text`
+    text-align: center;
+    padding: 10px;
+`
+
+const Favorites = ({ navigation }) => {
+    const { data, loading, error } = useQuery(MY_FAVORITES)
+
+    if (loading) return <Loader />
+
+    if (error) return <Center>Error: {error.message}</Center>
+
     return (
         <View
             style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
         >
-            <Text>hello from favorites</Text>
+            {data.notes.length > 0 ? (
+                <NoteFeed notes={data.notes} navigation={navigation} />
+            ) : (
+                <Center>No notes yet</Center>
+            )}
         </View>
     )
 }

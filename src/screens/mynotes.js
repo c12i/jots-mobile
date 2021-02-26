@@ -1,12 +1,33 @@
 import React from 'react'
-import { Text, View } from 'react-native'
+import { View } from 'react-native'
+import { useQuery } from '@apollo/client'
+import styled from 'styled-components/native'
 
-const MyNotes = () => {
+import Loader from '../components/Loader'
+import NoteFeed from '../components/NoteFeed'
+import { MY_NOTES } from '../gql/query'
+
+const Center = styled.Text`
+    text-align: center;
+    padding: 10px;
+`
+
+const MyNotes = ({ navigation }) => {
+    const { data, loading, error } = useQuery(MY_NOTES)
+
+    if (loading) return <Loader />
+
+    if (error) return <Center>Error: {error.message}</Center>
+
     return (
         <View
             style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
         >
-            <Text>hello from my notes</Text>
+            {data.notes.length > 0 ? (
+                <NoteFeed notes={data.notes} navigation={navigation} />
+            ) : (
+                <Center>No notes yet</Center>
+            )}
         </View>
     )
 }

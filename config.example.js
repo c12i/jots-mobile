@@ -13,7 +13,8 @@ if (Constants.manifest.debuggerHost) {
 // set environment variables
 const ENV = {
     dev: {
-        API_URI: `http://${localhost}:4000/gql`
+        API_URI: `http://${localhost}:4000/gql`,
+        WS_URI: `ws://${localhost}:4000/gql`
     },
     prod: {
         // update the API_URI value with your publicly deployed API address

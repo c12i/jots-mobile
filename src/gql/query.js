@@ -32,4 +32,44 @@ const GET_NOTE = gql`
     }
 `
 
-export { GET_NOTES, GET_NOTE }
+const MY_NOTES = gql`
+    query MyNotes {
+        me {
+            id
+            username
+            notes {
+                id
+                content
+                favoriteCount
+                createdAt
+                author {
+                    id
+                    username
+                    avatar
+                }
+            }
+        }
+    }
+`
+
+const MY_FAVORITES = gql`
+    query MyFavorites {
+        me {
+            id
+            username
+            favorites {
+                id
+                content
+                favoriteCount
+                createdAt
+                author {
+                    id
+                    username
+                    avatar
+                }
+            }
+        }
+    }
+`
+
+export { GET_NOTES, GET_NOTE, MY_NOTES, MY_FAVORITES }
