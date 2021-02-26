@@ -20,11 +20,9 @@ const MyNotes = ({ navigation }) => {
     if (error) return <Center>Error: {error.message}</Center>
 
     return (
-        <View
-            style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
-        >
-            {data.notes.length > 0 ? (
-                <NoteFeed notes={data.notes} navigation={navigation} />
+        <View>
+            {data.me.notes.length > 0 ? (
+                <NoteFeed notes={data.me.notes} navigation={navigation} />
             ) : (
                 <Center>No notes yet</Center>
             )}

@@ -14,8 +14,8 @@ const ErrorText = styled.Text`
 `
 
 const SignIn = ({ navigation }) => {
-    const storeToken = () => {
-        SecureStore.setItemAsync('token', '0x434d')
+    const storeToken = (token) => {
+        SecureStore.setItemAsync('token', token)
             .then(() => {
                 navigation.navigate('App')
             })

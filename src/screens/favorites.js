@@ -23,8 +23,8 @@ const Favorites = ({ navigation }) => {
         <View
             style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
         >
-            {data.notes.length > 0 ? (
-                <NoteFeed notes={data.notes} navigation={navigation} />
+            {data.me.favorites.length > 0 ? (
+                <NoteFeed notes={data.me.favorites} navigation={navigation} />
             ) : (
                 <Center>No notes yet</Center>
             )}
