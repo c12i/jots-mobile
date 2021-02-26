@@ -5,6 +5,7 @@ import styled from 'styled-components/native'
 
 import Loader from '../components/Loader'
 import NoteFeed from '../components/NoteFeed'
+import Refreshable from '../components/Refreshable'
 import { MY_NOTES } from '../gql/query'
 
 const Center = styled.Text`
@@ -13,7 +14,7 @@ const Center = styled.Text`
 `
 
 const MyNotes = ({ navigation }) => {
-    const { data, loading, error } = useQuery(MY_NOTES)
+    const { data, loading, error, refetch } = useQuery(MY_NOTES)
 
     if (loading) return <Loader />
 
@@ -21,11 +22,13 @@ const MyNotes = ({ navigation }) => {
 
     return (
         <View>
-            {data.me.notes.length > 0 ? (
-                <NoteFeed notes={data.me.notes} navigation={navigation} />
-            ) : (
-                <Center>No notes yet</Center>
-            )}
+            <Refreshable action={refetch}>
+                {data.me.notes.length > 0 ? (
+                    <NoteFeed notes={data.me.notes} navigation={navigation} />
+                ) : (
+                    <Center>No notes yet</Center>
+                )}
+            </Refreshable>
         </View>
     )
 }

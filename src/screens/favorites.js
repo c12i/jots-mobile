@@ -5,6 +5,7 @@ import styled from 'styled-components/native'
 
 import Loader from '../components/Loader'
 import NoteFeed from '../components/NoteFeed'
+import Refreshable from '../components/Refreshable'
 import { MY_FAVORITES } from '../gql/query'
 
 const Center = styled.Text`
@@ -13,7 +14,7 @@ const Center = styled.Text`
 `
 
 const Favorites = ({ navigation }) => {
-    const { data, loading, error } = useQuery(MY_FAVORITES)
+    const { data, loading, error, refetch } = useQuery(MY_FAVORITES)
 
     if (loading) return <Loader />
 
@@ -21,11 +22,16 @@ const Favorites = ({ navigation }) => {
 
     return (
         <View>
-            {data.me.favorites.length > 0 ? (
-                <NoteFeed notes={data.me.favorites} navigation={navigation} />
-            ) : (
-                <Center>No notes yet</Center>
-            )}
+            <Refreshable action={refetch}>
+                {data.me.favorites.length > 0 ? (
+                    <NoteFeed
+                        notes={data.me.favorites}
+                        navigation={navigation}
+                    />
+                ) : (
+                    <Center>No notes yet</Center>
+                )}
+            </Refreshable>
         </View>
     )
 }

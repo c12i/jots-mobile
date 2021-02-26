@@ -4,12 +4,15 @@ import { useQuery } from '@apollo/client'
 
 import NoteView from '../components/Note'
 import Loader from '../components/Loader'
+import Refreshable from '../components/Refreshable'
 import { GET_NOTE } from '../gql/query'
 
 const NoteScreen = ({ navigation }) => {
     const id = navigation.getParam('id')
 
-    const { data, loading, error } = useQuery(GET_NOTE, { variables: { id } })
+    const { data, loading, error, refetch } = useQuery(GET_NOTE, {
+        variables: { id }
+    })
 
     if (loading) return <Loader />
 
@@ -17,7 +20,9 @@ const NoteScreen = ({ navigation }) => {
 
     return (
         <View style={{ padding: 10 }}>
-            <NoteView note={data.note} />
+            <Refreshable action={refetch} variables={{ id }}>
+                <NoteView note={data.note} />
+            </Refreshable>
         </View>
     )
 }
