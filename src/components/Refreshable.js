@@ -4,9 +4,9 @@ import { ScrollView, RefreshControl, SafeAreaView } from 'react-native'
 const Refreshable = ({ children, action, variables }) => {
     const [refreshing, setRefreshing] = useState(false)
 
-    const onRefresh = async (variables = undefined) => {
+    const onRefresh = (vars = variables) => {
         setRefreshing(true)
-        await action(variables && { variables })
+        variables ? action({ variables: vars }) : action()
         setRefreshing(false)
     }
     return (
